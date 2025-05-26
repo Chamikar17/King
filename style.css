@@ -1,132 +1,106 @@
 body {
+  font-family: Arial, sans-serif;
   margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #0f0f0f;
-  color: #ffffff;
-}
-
-.navbar {
-  background-color: #1a1a1a;
-  padding: 15px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.logo {
-  font-weight: bold;
-  color: #ff4c4c;
-  font-size: 18px;
-}
-
-.menu {
-  font-size: 24px;
-  color: #fff;
-}
-
-.hero {
+  padding: 20px;
   text-align: center;
-  padding: 50px 20px;
+  font-size: 20px;
+  background-color: #f5f5f5;
 }
 
-.hero h1 {
-  font-size: 36px;
-  margin-bottom: 10px;
+.container {
+  max-width: 450px;
+  margin: 40px auto;
+  background: white;
+  padding: 40px 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
 }
 
-.hero p {
-  color: #cccccc;
-  font-size: 18px;
+h1 {
+  font-size: 28px;
   margin-bottom: 25px;
 }
 
-.join-btn {
-  background-color: #e53935;
+.points-container {
+  font-size: 24px;
+  margin-bottom: 25px;
+}
+
+button {
+  background-color: #4CAF50;
+  border: none;
   color: white;
-  padding: 12px 24px;
-  text-decoration: none;
+  padding: 16px 28px;
+  font-size: 20px;
   border-radius: 8px;
-  font-weight: bold;
-}
-
-.features {
-  padding: 30px 20px;
-}
-
-.features h2 {
-  font-size: 28px;
-  margin-bottom: 20px;
-}
-
-.feature-card {
-  background-color: #1e1e1e;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
-  margin-bottom: 30px;
-}
-
-.icon {
-  font-size: 40px;
-  margin-bottom: 10px;
-  color: #ff4c4c;
-}
-
-.feature-card h3 {
-  font-size: 22px;
-  margin-bottom: 10px;
-}
-
-.feature-card p {
-  font-size: 16px;
-  color: #bdbdbd;
-  margin-bottom: 15px;
-}
-
-.qr-btn, .owner-btn {
-  color: #ff4c4c;
-  text-decoration: none;
-  font-weight: bold;
-  padding: 8px 16px;
-  background-color: #111;
-  border-radius: 6px;
-  display: inline-block;
-  margin-top: 10px;
-}
-
-.progress-box {
-  background-color: #333;
+  cursor: pointer;
+  margin: 12px 0;
   width: 100%;
-  height: 10px;
-  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+button:hover:not(:disabled) {
+  background-color: #45a049;
+}
+
+button:disabled {
+  background-color: #999;
+  cursor: not-allowed;
+}
+
+.progress-wrapper {
+  width: 100%;
+  height: 30px;
+  background-color: #ddd;
+  border-radius: 15px;
   overflow: hidden;
-  margin: 10px 0;
+  margin-top: 25px;
 }
 
 #progressBar {
   height: 100%;
-  width: 0%;
-  background-color: #ff4c4c;
-  transition: width 0.3s;
+  width: 0;
+  background-color: #4caf50;
+  transition: width 1s linear;
 }
 
-button#watchAdBtn {
-  background-color: #28a745;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  cursor: pointer;
-  margin-top: 10px;
+.qr-box {
+  width: 100%;
+  height: 200px;
+  border: 2px dashed #aaa;
+  border-radius: 10px;
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: #555;
 }
 
-button#watchAdBtn:disabled {
-  background-color: #666;
-  cursor: not-allowed;
-}
+@media screen and (max-width: 480px) {
+  h1 {
+    font-size: 30px;
+  }
 
-.points {
-  font-size: 16px;
-  margin-bottom: 10px;
+  .points-container {
+    font-size: 26px;
+  }
+
+  button {
+    font-size: 22px;
+    padding: 18px 30px;
+  }
+
+  .container {
+    padding: 35px 20px;
+  }
+
+  .progress-wrapper {
+    height: 32px;
+  }
+
+  .qr-box {
+    height: 180px;
+    font-size: 16px;
+  }
 }
