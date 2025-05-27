@@ -56,3 +56,13 @@ function addPoint(){
   points++;
   pointsSpan.textContent = points;
 }
+
+
+document.getElementById("withdrawToggleBtn").addEventListener("click", function () {
+  const menu = document.getElementById("withdrawMenu");
+  if (menu.style.display === "block") {
+    menu.style.display = "none";
+  } else {
+    menu.style.display = "block";
+  }
+});
