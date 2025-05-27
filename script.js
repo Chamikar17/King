@@ -58,11 +58,6 @@ function addPoint(){
 }
 
 
-let points = 0;
-const watchAdBtn = document.getElementById("watchAdBtn");
-const progressBar = document.getElementById("progressBar");
-const pointsDisplay = document.getElementById("points");
-
 watchAdBtn.addEventListener("click", () => {
   watchAdBtn.disabled = true;
   let width = 0;
