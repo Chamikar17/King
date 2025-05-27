@@ -94,6 +94,19 @@ body {
   margin-top: 10px;
 }
 
+//777
+.qr-btn, .owner-btn {
+  color: #ff4c4c;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 8px 16px;
+  background-color: #111;
+  border-radius: 6px;
+  display: inline-block;
+  margin-top: 10px;
+}
+//677
+
 .progress-box {
   background-color: #333;
   width: 100%;
