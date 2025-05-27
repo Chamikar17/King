@@ -185,3 +185,37 @@ button#watchAdBtn:disabled {
   color: #bdbdbd;
   margin-bottom: 15px;
 }
+
+//*2*2*2**2*2*1*1*1*1**162-✅▶*#**#*#*#*#*#*#--#-#
+
+.withdraw-menu {
+  display: none;
+  background-color: #1e1e1e;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(255,255,255,0.1);
+  transition: all 0.3s ease-in-out;
+  text-align: center;
+}
+
+.withdraw-menu ul {
+  list-style: none;
+  padding: 0;
+}
+
+.withdraw-menu li {
+  margin: 10px 0;
+  color: #ff4c4c;
+  font-weight: bold;
+}
+
+#withdrawToggleBtn {
+  background-color: #e53935;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  }
