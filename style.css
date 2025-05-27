@@ -161,7 +161,7 @@ button#watchAdBtn:disabled {
   margin-bottom: 10px;
 }
 
-.feature-card {
+.withdraw {
   background-color: #1e1e1e;
   padding: 20px;
   border-radius: 12px;
@@ -175,12 +175,12 @@ button#watchAdBtn:disabled {
   color: #ff4c4c;
 }
 
-.feature-card h3 {
+.withdraw h3 {
   font-size: 22px;
   margin-bottom: 10px;
 }
 
-.feature-card p {
+.withdraw p {
   font-size: 16px;
   color: #bdbdbd;
   margin-bottom: 15px;
