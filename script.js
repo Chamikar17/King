@@ -58,11 +58,25 @@ function addPoint(){
 }
 
 
-document.getElementById("withdrawToggleBtn").addEventListener("click", function () {
-  const menu = document.getElementById("withdrawMenu");
-  if (menu.style.display === "block") {
-    menu.style.display = "none";
-  } else {
-    menu.style.display = "block";
-  }
+let points = 0;
+const watchAdBtn = document.getElementById("watchAdBtn");
+const progressBar = document.getElementById("progressBar");
+const pointsDisplay = document.getElementById("points");
+
+watchAdBtn.addEventListener("click", () => {
+  watchAdBtn.disabled = true;
+  let width = 0;
+  const interval = setInterval(() => {
+    if (width >= 100) {
+      clearInterval(interval);
+      points += 10;
+      pointsDisplay.innerText = points;
+      setTimeout(() => {
+        location.reload(); // reload the page after 1 second
+      }, 1000);
+    } else {
+      width += 1;
+      progressBar.style.width = width + "%";
+    }
+  }, 30); // animation speed
 });
