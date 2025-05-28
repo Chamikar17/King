@@ -1,5 +1,0 @@
-{
-  "rewrites": [
-    { "source": "/withdraw", "destination": "/withdraw.html" }
-  ]
-}
