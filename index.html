@@ -69,71 +69,63 @@
 
 
   
+
   <meta charset="UTF-8">
-  <title>PRABATH-MD | Pairing Code</title>
+  <title>PRABATH-MD Popup</title>
   <style>
     body {
-      background-color: black;
+      background-color: #000;
       color: white;
-      font-family: Arial, sans-serif;
       text-align: center;
-      padding-top: 100px;
+      padding-top: 50px;
     }
 
     button {
       padding: 10px 20px;
-      font-size: 18px;
-      background-color: #00b894;
-      color: white;
+      font-size: 20px;
+      background-color: green;
       border: none;
-      border-radius: 5px;
+      border-radius: 10px;
+      color: white;
       cursor: pointer;
     }
 
-    /* MODAL STYLES */
     .modal {
       display: none;
       position: fixed;
-      z-index: 999;
-      left: 0;
+      z-index: 99;
       top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
-      overflow: auto;
-      background-color: rgba(0,0,0,0.6);
+      background-color: rgba(0, 0, 0, 0.7);
     }
 
     .modal-content {
-      background-color: #1a1a1a;
-      margin: 15% auto;
+      background: #111;
+      margin: 20% auto;
       padding: 20px;
-      border: 2px solid #00ff00;
+      border-radius: 10px;
+      border: 2px solid lime;
       width: 80%;
       max-width: 400px;
-      border-radius: 15px;
-      color: white;
-      position: relative;
     }
 
     .close {
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      color: white;
-      font-size: 22px;
+      color: red;
+      float: right;
+      font-size: 24px;
       font-weight: bold;
       cursor: pointer;
     }
 
     .copy-button {
-      margin-top: 15px;
-      background-color: #00b894;
+      margin-top: 10px;
+      background-color: limegreen;
+      color: black;
       border: none;
-      padding: 10px 20px;
-      font-size: 16px;
+      padding: 10px;
       border-radius: 6px;
-      cursor: pointer;
-      color: white;
     }
   </style>
 </head>
@@ -142,35 +134,32 @@
   <h1>PRABATH-MD</h1>
   <button onclick="showModal()">Submit</button>
 
-  <!-- Modal -->
   <div id="pairModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="hideModal()">&times;</span>
       <h2>Your Pairing Code</h2>
-      <p>Code: <span id="code" style="color:#00ff99;">1F1MEB48</span></p>
-      <p>To pair your device, open WhatsApp on your phone, go to<br>
-        Settings > Linked Devices > Link a Device, and enter this code.</p>
+      <p style="color: #0f0;" id="code">1F1MEB48</p>
+      <p>Open WhatsApp > Linked Devices > Link a Device</p>
       <button class="copy-button" onclick="copyCode()">Copy Code</button>
     </div>
   </div>
 
   <script>
     function showModal() {
-      document.getElementById('pairModal').style.display = "block";
+      document.getElementById("pairModal").style.display = "block";
     }
 
     function hideModal() {
-      document.getElementById('pairModal').style.display = "none";
+      document.getElementById("pairModal").style.display = "none";
     }
 
     function copyCode() {
-      const codeText = document.getElementById('code').innerText;
-      navigator.clipboard.writeText(codeText).then(() => {
-        alert("Code copied to clipboard: " + codeText);
+      const code = document.getElementById("code").innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        alert("Code copied: " + code);
       });
     }
+  </script>
 
-
-  <script src="script.js"></script>
 </body>
 </html>
