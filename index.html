@@ -65,7 +65,111 @@
     </section>
 
 
-      
+
+
+
+  
+  <meta charset="UTF-8">
+  <title>PRABATH-MD | Pairing Code</title>
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 100px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 18px;
+      background-color: #00b894;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    /* MODAL STYLES */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.6);
+    }
+
+    .modal-content {
+      background-color: #1a1a1a;
+      margin: 15% auto;
+      padding: 20px;
+      border: 2px solid #00ff00;
+      width: 80%;
+      max-width: 400px;
+      border-radius: 15px;
+      color: white;
+      position: relative;
+    }
+
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .copy-button {
+      margin-top: 15px;
+      background-color: #00b894;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>PRABATH-MD</h1>
+  <button onclick="showModal()">Submit</button>
+
+  <!-- Modal -->
+  <div id="pairModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="hideModal()">&times;</span>
+      <h2>Your Pairing Code</h2>
+      <p>Code: <span id="code" style="color:#00ff99;">1F1MEB48</span></p>
+      <p>To pair your device, open WhatsApp on your phone, go to<br>
+        Settings > Linked Devices > Link a Device, and enter this code.</p>
+      <button class="copy-button" onclick="copyCode()">Copy Code</button>
+    </div>
+  </div>
+
+  <script>
+    function showModal() {
+      document.getElementById('pairModal').style.display = "block";
+    }
+
+    function hideModal() {
+      document.getElementById('pairModal').style.display = "none";
+    }
+
+    function copyCode() {
+      const codeText = document.getElementById('code').innerText;
+      navigator.clipboard.writeText(codeText).then(() => {
+        alert("Code copied to clipboard: " + codeText);
+      });
+    }
+
 
   <script src="script.js"></script>
 </body>
