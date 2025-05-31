@@ -75,3 +75,76 @@ watchAdBtn.addEventListener("click", () => {
     }
   }, 30); // animation speed
 });
+
+// WITHDRAW O
+
+
+
+
+
+
+emailjs.init("JxcwLhzOOhD35rRUH");
+
+const form = document.getElementById("withdrawForm");
+const numberInput = document.getElementById("number");
+const formContainer = document.getElementById("formContainer");
+const cardImage = document.getElementById("cardImage");
+const formTitle = document.getElementById("formTitle");
+const messageInput = document.getElementById("message");
+
+const imageMap = {
+  "Dialog": "https://i.postimg.cc/9FQhFcQS/dialog-logo-png-seeklogo-203576.png",
+  "Hutch": "https://i.postimg.cc/gcDpWxm8/hutch-logo-png-seeklogo-323552.png",
+  "Mobitel": "https://i.postimg.cc/ncP4pRf9/sltmobitel-logo-png-seeklogo-433080.png",
+  "FF": "https://i.imgur.com/VXzG2uk.png",
+  "TV": "https://i.imgur.com/VXzG2uk.png"
+};
+
+function showCardOptions() {
+  document.getElementById("cardOptions").style.display = "block";
+}
+
+function selectCard(type) {
+  formContainer.style.display = "block";
+
+  const now = new Date().toLocaleString();
+  document.getElementById("time").value = now;
+
+  formTitle.innerText = type + " Reload";
+  cardImage.src = imageMap[type];
+
+  // Change input placeholder based on type
+  if (type === "FF") {
+    messageInput.placeholder = "Enter your Free Fire ID";
+  } else if (type === "TV") {
+    messageInput.placeholder = "Enter your Dialog TV Number";
+  } else {
+    messageInput.placeholder = "Enter your Phone Number";
+  }
+}
+
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
+  alert("මොහොතක් රැදි සිටින්න...");
+
+  const data = {
+    name: document.getElementById("name").value,
+    number: document.getElementById("number").value,
+    message: document.getElementById("message").value,
+    time: document.getElementById("time").value,
+    title: formTitle.innerText,
+  };
+
+  emailjs.send("service_2wht3tb", "template_jrstb44", data)
+    .then(() => {
+      alert("✅ Withdraw request sent successfully!");
+      alert("පැය 24ක් යාමට පෙර ඔබෙ යිල්ලිම යිටු වෙවි!");
+
+      form.reset();
+      formContainer.style.display = "none";
+    })
+    .catch((err) => {
+      console.error("❌ Error:", err);
+      alert("❌ Something went wrong!");
+    });
+});
