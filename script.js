@@ -64,7 +64,7 @@ watchAdBtn.addEventListener("click", () => {
   const interval = setInterval(() => {
     if (width >= 100) {
       clearInterval(interval);
-      points += 10;
+      points += 0;
       pointsDisplay.innerText = points;
       setTimeout(() => {
         location.reload(); // reload the page after 1 second
