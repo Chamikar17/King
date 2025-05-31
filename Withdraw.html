@@ -1,208 +1,204 @@
-<!DOCTYPE html>  
-<html lang="en">  
-<head>  
-  <meta charset="UTF-8">  
-  <title>Withdraw Panel</title>  
-  <style>  
-    body {  
-      background: #000;  
-      color: #fff;  
-      font-family: Arial;  
-      text-align: center;  
-      padding: 20px;  
-    }  
-    h1 {  
-      font-size: 28px;  
-      margin-bottom: 20px;  
-    }  
-    .button {  
-      padding: 10px 20px;  
-      background: limegreen;  
-      color: #000;  
-      font-weight: bold;  
-      font-size: 16px;  
-      border: none;  
-      border-radius: 10px;  
-      cursor: pointer;  
-    }  
-    .card-buttons {  
-      margin-top: 20px;  
-    }  
-    .card-button {  
-      border: 2px solid limegreen;  
-      background: #000;  
-      color: limegreen;  
-      padding: 10px 20px;  
-      border-radius: 10px;  
-      margin: 5px;  
-      cursor: pointer;  
-      position: relative;  
-    }  
-    .locked::after {  
-      content: "🔒";  
-      position: absolute;  
-      top: 5px;  
-      right: 10px;  
-      font-size: 18px;  
-    }  
-    .card-button img {  
-      width: 24px;  
-      height: 24px;  
-      vertical-align: middle;  
-      margin-right: 5px;  
-    }  
-    #formContainer {  
-      display: none;  
-      margin-top: 30px;  
-      padding: 20px;  
-      border: 2px solid #0f0;  
-      border-radius: 10px;  
-      background-color: #111;  
-    }  
-    input {  
-      width: 90%;  
-      padding: 10px;  
-      margin: 10px auto;  
-      display: block;  
-      border-radius: 5px;  
-      border: none;  
-    }  
-    #cardImage {  
-      width: 100px;  
-      border-radius: 10px;  
-      margin: 10px auto;  
-    }  
-    #submitBtn {  
-      background: limegreen;  
-      color: #000;  
-      font-weight: bold;  
-    }  
-    small {  
-      display: block;  
-      margin-top: 20px;  
-      color: #888;  
-    }  
-  </style>  
-</head>  
-<body>  
-  <h1>Withdraw Panel</h1>  
-  <p id="pointsDisplay">Points: Loading...</p>  
-  <button class="button" onclick="showCardOptions()">Get Withdraw</button>  
-  
-  <div class="card-buttons" id="cardOptions" style="display:none;">  
-    <button class="card-button locked" onclick="trySelectCard('Dialog')">  
-      <img src="https://i.postimg.cc/9FQhFcQS/dialog-logo-png-seeklogo-203576.png"> Dialog Card  
-    </button>  
-    <button class="card-button locked" onclick="trySelectCard('Hutch')">  
-      <img src="https://i.postimg.cc/gcDpWxm8/hutch-logo-png-seeklogo-323552.png"> Hutch Card  
-    </button>  
-    <button class="card-button locked" onclick="trySelectCard('Mobitel')">  
-      <img src="https://i.postimg.cc/ncP4pRf9/sltmobitel-logo-png-seeklogo-433080.png"> Mobitel Card  
-    </button>  
-    <button class="card-button locked" onclick="trySelectCard('FF')">  
-      <img src="https://i.imgur.com/VXzG2uk.png"> FF ID Top-up  
-    </button>  
-    <button class="card-button locked" onclick="trySelectCard('TV')">  
-      <img src="https://i.imgur.com/VXzG2uk.png"> Dialog TV Reload  
-    </button>  
-  </div>  
-  
-  <div id="formContainer">  
-    <h2 id="formTitle"></h2>  
-    <img id="cardImage" src="" alt="Card Image">  
-    <form id="withdrawForm">  
-      <input type="text" id="name" placeholder="Your Active Email " required>  
-      <input type="text" id="number" placeholder="Your Name" required>  
-      <input type="text" id="message" placeholder="Your Number / Reload Number" required>  
-      <input type="text" id="time" readonly>  
-      <input type="submit" id="submitBtn" value="Submit">  
-    </form>  
-    <small>2025 - Made by King Mafia | KING MS</small>  
-  </div>  
-  
-  <!-- DATA INJECTION (Index.html එකෙන් බලනවා කියලා assume කරමු) -->  
-  <script>  
-    // 🟢 index.html එකෙන් හරහා set කරන JSON object එක  
-    window.data = {  
-      points: ${window.data} // <-- මෙතන තමයි ඔබේ userට තියෙන points value එක  
-    };  
-  </script>  
-  
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>  
-  <script>  
-    emailjs.init("JxcwLhzOOhD35rRUH");  
-  
-    const imageMap = {  
-      "Dialog": "https://i.postimg.cc/9FQhFcQS/dialog-logo-png-seeklogo-203576.png",  
-      "Hutch": "https://i.postimg.cc/gcDpWxm8/hutch-logo-png-seeklogo-323552.png",  
-      "Mobitel": "https://i.postimg.cc/ncP4pRf9/sltmobitel-logo-png-seeklogo-433080.png",  
-      "FF": "https://i.imgur.com/VXzG2uk.png",  
-      "TV": "https://i.imgur.com/VXzG2uk.png"  
-    };  
-  
-    const unlockPoints = {  
-      "Dialog": 10,  
-      "Hutch": 15,  
-      "Mobitel": 20,  
-      "FF": 25,  
-      "TV": 30  
-    };  
-  
-    let userPoints = window.data?.points || 0;  
-    document.getElementById("pointsDisplay").innerText = "Points: " + userPoints;  
-  
-    function showCardOptions() {  
-      document.getElementById("cardOptions").style.display = "block";  
-    }  
-  
-    function trySelectCard(type) {  
-      const requiredPoints = unlockPoints[type];  
-      if (userPoints >= requiredPoints) {  
-        selectCard(type);  
-      } else {  
-        alert(`🔒 You need ${requiredPoints} points to unlock ${type}`);  
-      }  
-    }  
-  
-    function selectCard(type) {  
-      document.getElementById("formContainer").style.display = "block";  
-      document.getElementById("time").value = new Date().toLocaleString();  
-      document.getElementById("formTitle").innerText = `${type} Reload`;  
-      document.getElementById("cardImage").src = imageMap[type];  
-      const messageInput = document.getElementById("message");  
-      if (type === "FF") {  
-        messageInput.placeholder = "Enter your Free Fire ID";  
-      } else if (type === "TV") {  
-        messageInput.placeholder = "Enter your Dialog TV Number";  
-      } else {  
-        messageInput.placeholder = "Enter your Phone Number";  
-      }  
-    }  
-  
-    document.getElementById("withdrawForm").addEventListener("submit", function (e) {  
-      e.preventDefault();  
-      alert("මොහොතක් රැදි සිටින්න...");  
-  
-      const data = {  
-        name: document.getElementById("name").value,  
-        number: document.getElementById("number").value,  
-        message: document.getElementById("message").value,  
-        time: document.getElementById("time").value,  
-        title: document.getElementById("formTitle").innerText  
-      };  
-  
-      emailjs.send("service_2wht3tb", "template_jrstb44", data)  
-        .then(() => {  
-          alert("✅ Withdraw request sent successfully!");  
-          alert("පැය 24ක් යාමට පෙර ඔබේ යිල්ලිම යිටු වෙවි!");  
-          document.getElementById("withdrawForm").reset();  
-          document.getElementById("formContainer").style.display = "none";  
-        })  
-        .catch((err) => {  
-          console.error("❌ Error:", err);  
-          alert("❌ Something went wrong!");  
-        });  
-    });  
-  </script>  
-</body>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Withdraw Panel</title>
+  <style>
+    body {
+      background: #000;
+      color: #fff;
+      font-family: Arial;
+      text-align: center;
+      padding: 20px;
+    }
+    h1 { font-size: 28px; margin-bottom: 10px; }
+    #pointsDisplay { font-size: 18px; margin-bottom: 20px; color: lime; }
+
+    .button {
+      padding: 10px 20px;
+      background: limegreen;
+      color: #000;
+      font-weight: bold;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .card-buttons { margin-top: 20px; }
+    .card-button {
+      border: 2px solid limegreen;
+      background: #000;
+      color: limegreen;
+      padding: 10px 20px;
+      border-radius: 10px;
+      margin: 5px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .locked::after {
+      content: "🔒";
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      font-size: 18px;
+    }
+
+    #formContainer {
+      display: none;
+      margin-top: 30px;
+      padding: 20px;
+      border: 2px solid #0f0;
+      border-radius: 10px;
+      background-color: #111;
+    }
+
+    input {
+      width: 90%;
+      padding: 10px;
+      margin: 10px auto;
+      display: block;
+      border-radius: 5px;
+      border: none;
+    }
+
+    #cardImage {
+      width: 100px;
+      border-radius: 10px;
+      margin: 10px auto;
+    }
+
+    #submitBtn {
+      background: limegreen;
+      color: #000;
+      font-weight: bold;
+    }
+
+    small {
+      display: block;
+      margin-top: 20px;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Withdraw Panel</h1>
+  <div id="pointsDisplay">You have: 0 Points</div>
+  <button class="button" onclick="showCardOptions()">Get Withdraw</button>
+
+  <div class="card-buttons" id="cardOptions" style="display:none;">
+    <button class="card-button locked" data-card="Dialog" data-lock="10">
+      Dialog Card
+    </button>
+    <button class="card-button locked" data-card="Hutch" data-lock="15">
+      Hutch Card
+    </button>
+    <button class="card-button" data-card="Mobitel">
+      Mobitel Card
+    </button>
+    <button class="card-button locked" data-card="FF" data-lock="20">
+      FF ID Top-up
+    </button>
+    <button class="card-button" data-card="TV">
+      Dialog TV Reload
+    </button>
+  </div>
+
+  <div id="formContainer">
+    <h2 id="formTitle"></h2>
+    <img id="cardImage" src="" alt="Card Image">
+    <form id="withdrawForm">
+      <input type="text" id="name" placeholder="Your Active Email " required>
+      <input type="text" id="number" placeholder="Your Name" required>
+      <input type="text" id="message" placeholder="Your Number / Reload" required>
+      <input type="text" id="time" readonly>
+      <input type="submit" id="submitBtn" value="Submit">
+    </form>
+    <small>2025 - Made by King Mafia | KING MS</small>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    emailjs.init("JxcwLhzOOhD35rRUH");
+
+    const form = document.getElementById("withdrawForm");
+    const formContainer = document.getElementById("formContainer");
+    const formTitle = document.getElementById("formTitle");
+    const cardImage = document.getElementById("cardImage");
+    const messageInput = document.getElementById("message");
+    const pointsDisplay = document.getElementById("pointsDisplay");
+
+    const imageMap = {
+      "Dialog": "https://i.postimg.cc/9FQhFcQS/dialog-logo-png-seeklogo-203576.png",
+      "Hutch": "https://i.postimg.cc/gcDpWxm8/hutch-logo-png-seeklogo-323552.png",
+      "Mobitel": "https://i.postimg.cc/ncP4pRf9/sltmobitel-logo-png-seeklogo-433080.png",
+      "FF": "https://i.imgur.com/VXzG2uk.png",
+      "TV": "https://i.imgur.com/VXzG2uk.png"
+    };
+
+    // Get user points
+    let userPoints = window.data?.points ?? 0;
+    pointsDisplay.innerText = "You have: " + userPoints + " Points";
+
+    function showCardOptions() {
+      document.getElementById("cardOptions").style.display = "block";
+    }
+
+    // Lock check
+    document.querySelectorAll(".card-button").forEach(btn => {
+      btn.addEventListener("click", function () {
+        const requiredPoints = parseInt(this.getAttribute("data-lock"));
+        const cardType = this.getAttribute("data-card");
+
+        if (requiredPoints && userPoints < requiredPoints) {
+          alert(`🔒 You need ${requiredPoints} points to unlock this option. You only have ${userPoints} points.`);
+          return;
+        }
+
+        openWithdrawForm(cardType);
+      });
+    });
+
+    function openWithdrawForm(type) {
+      formContainer.style.display = "block";
+      document.getElementById("time").value = new Date().toLocaleString();
+      formTitle.innerText = type + " Withdraw";
+      cardImage.src = imageMap[type];
+
+      if (type === "FF") {
+        messageInput.placeholder = "Enter your Free Fire ID";
+      } else if (type === "TV") {
+        messageInput.placeholder = "Enter your Dialog TV Number";
+      } else {
+        messageInput.placeholder = "Enter your Phone Number";
+      }
+    }
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      alert("⏳ Please wait...");
+
+      const data = {
+        name: document.getElementById("name").value,
+        number: document.getElementById("number").value,
+        message: document.getElementById("message").value,
+        time: document.getElementById("time").value,
+        title: formTitle.innerText
+      };
+
+      emailjs.send("service_2wht3tb", "template_jrstb44", data)
+        .then(() => {
+          alert("✅ Withdraw request sent successfully!");
+          form.reset();
+          formContainer.style.display = "none";
+        })
+        .catch(err => {
+          console.error("❌ Error:", err);
+          alert("❌ Something went wrong!");
+        });
+    });
+  </script>
+</body>
 </html>
