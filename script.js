@@ -56,3 +56,5 @@ function addPoint(){
   points++;
   pointsSpan.textContent = points;
 }
+let userPoints = (window.data?.points !== undefined) ? window.data.points : 0;
+document.getElementById("pointsDisplay").innerText = "Points: " + userPoints;
