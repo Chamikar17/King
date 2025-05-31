@@ -14,7 +14,7 @@ watchBtn.addEventListener("click", () => {
     alert("Please close the previous ad before starting a new one.");
     return;
   }
-
+alret("තප්පර 15-17 අට්ගර කාලයක් ad එක නරබා මෙතනට පැමිනෙන්න.")
   adWindow = window.open(
     "https://www.profitableratecpm.com/x1fu9w31j?key=9e56e55a3a3f57fab750d1c7a4c9fac4",
     "_blank",
